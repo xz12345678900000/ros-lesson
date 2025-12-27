@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="my_first_robot">
+
+  <!-- 定义机器人的主体部分 -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <!-- 一个0.5米长，0.3米宽，0.2米高的盒子 -->
+        <box size="0.5 0.3 0.2"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0.6 0.8 1"/> <!-- 浅蓝色 -->
+      </material>
+    </visual>
+  </link>
+
+  <!-- 关键：添加差分驱动插件，使模型能响应/cmd_vel话题 -->
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+    </plugin>
+  </gazebo>
+
+</robot>

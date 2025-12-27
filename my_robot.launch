@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- 启动键盘控制节点 -->
+    <node name="robot_keyboard_control" pkg="my_first_robot" type="robot_keyboard_control.py" output="screen" />
+    
+    <!-- 设置ROS参数，定义机器人的初始位置（后续可在RViz等工具中使用） -->
+   
+    <param name="initial_x" value="0.0" />
+    <param name="initial_y" value="0.0" />
+    <param name="initial_z" value="0.0" />
+</launch>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 1. 加载机器人模型到参数服务器 -->
+  <param name="robot_description" textfile="$(find my_first_robot)/urdf/my_robot.urdf" />
+
+  <!-- 2. 启动 robot_state_publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <!-- 设置固定发布频率，确保TF稳定 -->
+    <param name="publish_frequency" type="double" value="30.0"/>
+  </node>
+
+  <!-- 3. 启动一个静态的 joint_state_publisher_gui (会打开一个小窗口，可以忽略) -->
+  <!-- 这个节点会为无关节的模型发布一个默认的静态关节状态，保证TF树有数据 -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+  <!-- 4. 启动RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_first_robot)/config/robot_view.rviz" required="true" />
+
+  <!-- 5. 启动键盘控制节点 -->
+  <node name="robot_keyboard_control" pkg="my_first_robot" type="robot_keyboard_control.py" output="screen" />
+   <node name="robot_simulator" pkg="my_first_robot" type="robot_simulator.py" output="screen" />
+</launch>
